@@ -2,6 +2,7 @@ from datetime import datetime
 
 from bs4 import BeautifulSoup
 from coala_utils.decorators import generate_ordering
+import json
 
 
 @generate_ordering('timestamp', 'id', 'text', 'user', 'replies', 'retweets', 'likes')
@@ -55,3 +56,18 @@ class Tweet:
                     yield cls.from_soup(tweet)
                 except AttributeError:
                     pass  # Incomplete info? Discard!
+
+    @classmethod
+    def tweet_html(cls, jsonfile):
+        with open(jsonfile) as f:
+            data = json.load(f)
+        d=data[0]['html']
+        return d
+
+    @classmethod
+    def tweet_url(cls, jsonfile):
+        with open(jsonfile) as f:
+            data = json.load(f)
+        d=data[0]['url']
+        d="www.twitter.com"+d
+        return d

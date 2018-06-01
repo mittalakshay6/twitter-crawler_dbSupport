@@ -1,4 +1,4 @@
-w# TwitterScraper
+# TwitterScraper
 # Copyright 2016-2018 Ahmet Taspinar
 # See LICENSE for details.
 """
