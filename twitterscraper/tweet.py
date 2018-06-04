@@ -71,9 +71,9 @@ class Tweet:
     def tweet_url(cls, i, jsonfile):
         with open(jsonfile) as f:
             data = json.load(f)
-        if data[i]:
+        try:
             d = data[i]['url']
             d = "www.twitter.com" + d
             return d
-        else:
+        except IndexError:
             return -1
