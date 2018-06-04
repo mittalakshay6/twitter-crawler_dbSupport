@@ -30,7 +30,7 @@ class Tweet:
             # user=tweet.find('span', 'username').text or "",
             # fullname=tweet.find('strong', 'fullname').text or "",
             # id=tweet['data-item-id'] or "",
-            url = tweet.find('div', 'tweet')['data-permalink-path'] or "",
+            url=tweet.find('div', 'tweet')['data-permalink-path'] or "",
             timestamp=datetime.utcfromtimestamp(
                 int(tweet.find('span', '_timestamp')['data-time'])),
             # text=tweet.find('p', 'tweet-text').text or "",
@@ -58,16 +58,22 @@ class Tweet:
                     pass  # Incomplete info? Discard!
 
     @classmethod
-    def tweet_html(cls, jsonfile):
+    def tweet_html(cls, i, jsonfile):
         with open(jsonfile) as f:
             data = json.load(f)
-        d=data[0]['html']
-        return d
+        if data[i]:
+            d = data[i]['html']
+            return d
+        else:
+            return -1
 
     @classmethod
-    def tweet_url(cls, jsonfile):
+    def tweet_url(cls, i, jsonfile):
         with open(jsonfile) as f:
             data = json.load(f)
-        d=data[0]['url']
-        d="www.twitter.com"+d
-        return d
+        if data[i]:
+            d = data[i]['url']
+            d = "www.twitter.com" + d
+            return d
+        else:
+            return -1
